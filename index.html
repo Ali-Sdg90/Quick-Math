@@ -20,24 +20,28 @@
             </span>
         </header>
         <main>
-            <div class="game-box">
-                <div class="side1">
-                    <div class="health-bar">
-                        <div class="health-bar__blocks"></div>
-                        <div class="health-bar__blocks"></div>
-                        <div class="health-bar__blocks"></div>
-                    </div>
+            <div class="side1">
+                <div class="health-bar">
+                    <div class="health-bar__blocks"></div>
+                    <div class="health-bar__blocks"></div>
+                    <div class="health-bar__blocks"></div>
+                </div>
+                <div class="quiz">
                     <span class="first-number">23</span>
                     <span class="operation">+</span>
                     <span class="second-number">44</span>
                     <span>=</span>
-                    <input type="number" />
-                    <br />
-                    <input type="submit" />
+                    <input
+                        type="number"
+                        autofocus
+                        autocomplete="off"
+                        step="1"
+                    />
                 </div>
-                <div class="side2"></div>
-                <div class="side3"></div>
+                <input type="submit" />
             </div>
+            <!-- <div class="side2"></div> -->
+            <!-- <div class="side3"></div> -->
         </main>
         <script src="js/script.js"></script>
     </body>
