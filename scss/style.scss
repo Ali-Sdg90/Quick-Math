@@ -18,49 +18,52 @@ body {
     background: var(--background-color);
     width: 100%;
     height: 100vh;
-    display: grid;
-    grid-template-rows: 100px calc(100vh - 100px);
     overflow: hidden;
 }
 
 header {
+    position: absolute;
+    top: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
+    background: var(--background-color);
+    z-index: 2;
 }
 
 .timer-side,
 .timer-game {
-    // border: 1px solid green;
     @include flex-center-childs();
     flex-direction: column;
 
     div,
     span {
-        font-size: 1.2rem;
-        padding: 4px;
+        font-size: 3.37vh;
+        padding: 0.56vh;
     }
 }
 
 h1 {
-    font-size: 2rem;
-    // border: 1px solid rgb(72, 0, 255);
+    font-size: 5.61vh;
     @include flex-center-childs();
-    // background: var(--game-color);
-    text-shadow: -2px 0 rgba(255, 0, 251, 0.25), 2px 0 rgba(255, 0, 0, 0.25);
+    text-shadow: -0.28vh 0 rgba(255, 0, 251, 0.25),
+        0.28vhpx 0 rgba(255, 0, 0, 0.25);
 }
 
 main {
-    // border: 1px solid pink;
     width: 100%;
-    @include flex-center-childs();
-    position: relative;
-    // ---------------------
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform-style: preserve-3d;
-    // transform: rotateX(260deg) rotateZ(-100deg) translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform-style: preserve-3d;
+
+    transform: rotateX(260deg) rotateZ(-100deg);
+
+    // transform: rotateX(260deg) rotateZ(-170deg);
+
+    // transform: rotateX(182deg) rotateZ(-179deg) translate(0, -200px);
 }
 
 .side1,
@@ -73,11 +76,13 @@ main {
     display: grid;
     padding: 60px 50px 20px 50px;
     grid-template-rows: 1fr 1fr 2fr 1.4fr;
-    // transform: skewY(30deg);
-    // transition: $change-side-timer;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
 
     .health-bar {
-        // border: 1px solid green;
         width: 100%;
         height: 70px;
         display: grid;
@@ -93,7 +98,6 @@ main {
     }
 
     .solve-me {
-        // border: 1px solid red;
         letter-spacing: 1px;
         display: flex;
         align-items: end;
@@ -101,7 +105,6 @@ main {
     }
 
     .quiz {
-        // border: 1px solid orange;
         @include flex-center-childs();
 
         span {
@@ -137,24 +140,21 @@ main {
         &:hover {
             letter-spacing: 5px;
         }
-
-        &:active {
-            // background: var(--game-color);
-        }
     }
 }
 
-.side1{
-
-    background: red;
+.side1 {
+    width: 400px;
+    transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
+    transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
+    transform-origin: right;
 }
 
-.side2{
-
+.side2 {
+    transform: rotateX(90deg) scaleX(-1);
+    transform-origin: bottom;
 }
 
-.side3{
-
-    background: blue;
-    // display: none;
+.side3 {
+    transform: translateZ(-400px) scaleX(-1);
 }
