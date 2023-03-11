@@ -137,4 +137,11 @@ main {
 .side2 .submit-btn:hover,
 .side3 .submit-btn:hover {
   letter-spacing: 5px;
+}
+.side1 {
+  background: red;
+}
+
+.side3 {
+  background: blue;
 }/*# sourceMappingURL=style.css.map */

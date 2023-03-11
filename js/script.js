@@ -12,6 +12,5 @@ function changeColor() {
         rgbSaver[2] / 3
     });
     `;
-    console.log(document.querySelector(":root").style.cssText);
     rgbSaver = [];
 }
