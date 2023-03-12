@@ -78,12 +78,25 @@ function calc(str) {
 function changeSide(round) {
     switch (round) {
         case 0:
-            main.style.transform = "rotateX(260deg) rotateZ(-170deg)";
+            main.style.transform = "rotateX(260deg) rotateZ(-179deg)";
+
+            setTimeout(() => {
+                main.style.transform = "rotateX(260deg) rotateZ(-170deg)";
+                inputs[round + 1].focus();
+            }, 700);
+
             disableEnableInputs(round);
             break;
         case 1:
             main.style.transform =
-                "rotateX(185deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px)";
+                "rotateX(181deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px)";
+
+            setTimeout(() => {
+                main.style.transform =
+                    "rotateX(185deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px)";
+                inputs[round + 1].focus();
+            }, 750);
+
             disableEnableInputs(round);
             break;
         default:
@@ -119,6 +132,14 @@ function wrongAnimation(round) {
     });
 }
 
+document.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        submitBtns.forEach(function (submitBtn) {
+            submitBtn.dispatchEvent(new Event("click"));
+        });
+    }
+});
+
 changeColor();
 function changeColor() {
     let rgbSaver = [];
@@ -133,4 +154,29 @@ function changeColor() {
         rgbSaver[2] / 3
     });
     `;
+}
+
+// Game Timer
+
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+
+startTimer();
+
+function startTimer() {
+    startTime = new Date();
+    timerInterval = setInterval(updateElapsedTime, 100);
+}
+
+function pauseTimer() {
+    clearInterval(timerInterval);
+}
+
+function updateElapsedTime() {
+    elapsedTime = new Date() - startTime;
+}
+
+function getElapsedTime() {
+    return elapsedTime;
 }

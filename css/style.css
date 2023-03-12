@@ -15,17 +15,22 @@
     transform: translateX(0);
   }
 }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 20px;
+  cursor: default;
+}
+
 :root {
   --background-color: red;
   --game-color: green;
   --line-color: blue;
 }
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-size: 20px;
+::selection {
+  background: transparent;
 }
 
 body {
@@ -155,6 +160,12 @@ main {
   padding: 5px;
   margin: 10px;
   background: var(--background-color);
+}
+.side1 .quiz input::selection,
+.side2 .quiz input::selection,
+.side3 .quiz input::selection {
+  background: var(--game-color);
+  color: var(--background-color);
 }
 .side1 .submit-btn,
 .side2 .submit-btn,

@@ -2,17 +2,22 @@
 @import "mixin";
 @import "keyframes";
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+    cursor: default;
+}
+
 :root {
     --background-color: red;
     --game-color: green;
     --line-color: blue;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-size: 20px;
+::selection {
+    background: transparent;
 }
 
 body {
@@ -133,6 +138,11 @@ main {
             padding: 5px;
             margin: 10px;
             background: var(--background-color);
+            
+            &::selection{
+                background: var(--game-color);
+                color: var(--background-color);
+            }
         }
     }
 
@@ -143,7 +153,7 @@ main {
         transition: 0.2s;
         font-size: 1.1rem;
         letter-spacing: 1.5px;
-        
+
         &-effects {
             cursor: pointer;
 
