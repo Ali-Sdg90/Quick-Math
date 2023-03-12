@@ -64,7 +64,7 @@ main {
 
     // transform: rotateX(260deg) rotateZ(-170deg);
 
-    // transform: rotateX(182deg) rotateZ(-179deg) translate(0, -200px);
+    // transform: rotateX(185deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px);
 
     transition: transform $change-side-timer;
 }
@@ -143,17 +143,23 @@ main {
         transition: 0.2s;
         font-size: 1.1rem;
         letter-spacing: 1.5px;
-        cursor: pointer;
+        
+        &-effects {
+            cursor: pointer;
 
-        &:hover {
-            letter-spacing: 5px;
+            &:hover {
+                letter-spacing: 4px;
+            }
+
+            &:active {
+                letter-spacing: 3px;
+            }
         }
     }
 }
 
 .side1 {
     width: 400px;
-    transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
     transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
     transform-origin: right;
 }

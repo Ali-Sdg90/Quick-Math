@@ -77,7 +77,7 @@ main {
   left: 35%;
   transform-style: preserve-3d;
   transform: rotateX(260deg) rotateZ(-100deg);
-  transition: transform 1s;
+  transition: transform 0.7s;
 }
 
 .side1,
@@ -165,17 +165,25 @@ main {
   transition: 0.2s;
   font-size: 1.1rem;
   letter-spacing: 1.5px;
+}
+.side1 .submit-btn-effects,
+.side2 .submit-btn-effects,
+.side3 .submit-btn-effects {
   cursor: pointer;
 }
-.side1 .submit-btn:hover,
-.side2 .submit-btn:hover,
-.side3 .submit-btn:hover {
-  letter-spacing: 5px;
+.side1 .submit-btn-effects:hover,
+.side2 .submit-btn-effects:hover,
+.side3 .submit-btn-effects:hover {
+  letter-spacing: 4px;
+}
+.side1 .submit-btn-effects:active,
+.side2 .submit-btn-effects:active,
+.side3 .submit-btn-effects:active {
+  letter-spacing: 3px;
 }
 
 .side1 {
   width: 400px;
-  transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
   transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
   transform-origin: right;
 }
