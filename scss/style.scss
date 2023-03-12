@@ -1,5 +1,6 @@
 @import "config";
 @import "mixin";
+@import "keyframes";
 
 :root {
     --background-color: red;
@@ -47,7 +48,7 @@ h1 {
     font-size: 5.61vh;
     @include flex-center-childs();
     text-shadow: -0.28vh 0 rgba(255, 0, 251, 0.25),
-        0.28vhpx 0 rgba(255, 0, 0, 0.25);
+        0.28vh 0 rgba(255, 0, 0, 0.25);
 }
 
 main {
@@ -64,6 +65,8 @@ main {
     // transform: rotateX(260deg) rotateZ(-170deg);
 
     // transform: rotateX(182deg) rotateZ(-179deg) translate(0, -200px);
+
+    transition: transform $change-side-timer;
 }
 
 .side1,
@@ -83,17 +86,22 @@ main {
     position: absolute;
 
     .health-bar {
-        width: 100%;
+        width: 301px;
         height: 70px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 45px;
         padding: 14px 45px;
 
-        div {
+        &__blocks {
             border: 1px solid var(--line-color);
             height: 100%;
             border-radius: 50%;
+        }
+
+        .lost-health {
+            background: var(--line-color);
+            box-shadow: 0 0 5px var(--background-color);
         }
     }
 
@@ -157,4 +165,8 @@ main {
 
 .side3 {
     transform: translateZ(-400px) scaleX(-1);
+}
+
+.shake {
+    animation: shake 0.3s;
 }

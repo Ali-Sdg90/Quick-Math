@@ -5,6 +5,9 @@ const operations = document.querySelectorAll(".operation");
 const secondNumbers = document.querySelectorAll(".second-number");
 const inputs = document.querySelectorAll(".input");
 const submitBtns = document.querySelectorAll(".submit-btn");
+const sideHealthcircles = document.querySelectorAll(".health-bar__blocks");
+const main = document.querySelector("main");
+const sideHealthLost = [0, 0, 0];
 let answer = ["", "", ""];
 
 for (let round = 0; round < 3; round++) {
@@ -27,7 +30,7 @@ for (let round = 0; round < 3; round++) {
         case 3:
             ransdNum = "*";
             break;
-        case 4:
+        default:
             ransdNum = "/";
             break;
     }
@@ -40,9 +43,24 @@ for (let round = 0; round < 3; round++) {
     calcStr += ransdNum;
     secondNumbers[round].textContent = ransdNum;
 
-    calcStr = calcStr.replace("--", "-");
-    answer[round] = calc(calcStr).toFixed(0);
-    // console.log(calcStr, calc(calcStr), calc(calcStr).toFixed(0));
+    calcStr = calcStr.replace("--", "+");
+    answer[round] = Math.floor(calc(calcStr));
+
+    submitBtns[round].addEventListener("click", function () {
+        let inputQstn = inputs[round].value;
+        if (!inputs[round].value) {
+            return;
+        }
+        console.log(inputQstn, answer[round]);
+        if (Number(inputQstn) === Number(answer[round])) {
+            console.log("yea!");
+            changeSide(round);
+        } else {
+            console.log("NOO!");
+            wrongAnimation(round);
+        }
+    });
+    console.log(calcStr, calc(calcStr), Math.floor(calc(calcStr)));
 }
 
 function calc(str) {
@@ -50,6 +68,41 @@ function calc(str) {
     return tempFunc();
 }
 
+function changeSide(round) {
+    console.log(typeof round);
+    switch (round) {
+        case 0:
+            main.style.transform = "rotateX(260deg) rotateZ(-170deg)";
+            break;
+        case 1:
+            main.style.transform =
+                "rotateX(182deg) rotateZ(-179deg) translate(0, -200px)";
+            break;
+        default:
+            endGameWin();
+            break;
+    }
+}
+
+function wrongAnimation(round) {
+    inputs[round].classList.add("shake");
+    if (sideHealthLost[round] === 2) {
+        endGameLose();
+    } else {
+        sideHealthLost[round]++;
+        console.log(sideHealthLost[round]);
+        // console.log(round * 3 + sideHealthLost[round]);
+        for (let health = 0; health < sideHealthLost[round]; health++) {
+            // console.log("IN");
+            sideHealthcircles[round * 3 + health].classList.add("lost-health");
+        }
+    }
+    inputs[round].addEventListener("animationend", function () {
+        inputs[round].value = "";
+        inputs[round].classList.remove("shake");
+        inputs[round].focus();
+    });
+}
 
 changeColor();
 function changeColor() {

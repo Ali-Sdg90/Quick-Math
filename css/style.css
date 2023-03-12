@@ -1,3 +1,20 @@
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 :root {
   --background-color: red;
   --game-color: green;
@@ -48,7 +65,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-shadow: -0.28vh 0 rgba(255, 0, 251, 0.25), 0.28vhpx 0 rgba(255, 0, 0, 0.25);
+  text-shadow: -0.28vh 0 rgba(255, 0, 251, 0.25), 0.28vh 0 rgba(255, 0, 0, 0.25);
 }
 
 main {
@@ -60,6 +77,7 @@ main {
   left: 35%;
   transform-style: preserve-3d;
   transform: rotateX(260deg) rotateZ(-100deg);
+  transition: transform 1s;
 }
 
 .side1,
@@ -81,19 +99,25 @@ main {
 .side1 .health-bar,
 .side2 .health-bar,
 .side3 .health-bar {
-  width: 100%;
+  width: 301px;
   height: 70px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 45px;
   padding: 14px 45px;
 }
-.side1 .health-bar div,
-.side2 .health-bar div,
-.side3 .health-bar div {
+.side1 .health-bar__blocks,
+.side2 .health-bar__blocks,
+.side3 .health-bar__blocks {
   border: 1px solid var(--line-color);
   height: 100%;
   border-radius: 50%;
+}
+.side1 .health-bar .lost-health,
+.side2 .health-bar .lost-health,
+.side3 .health-bar .lost-health {
+  background: var(--line-color);
+  box-shadow: 0 0 5px var(--background-color);
 }
 .side1 .solve-me,
 .side2 .solve-me,
@@ -163,4 +187,8 @@ main {
 
 .side3 {
   transform: translateZ(-400px) scaleX(-1);
+}
+
+.shake {
+  animation: shake 0.3s;
 }/*# sourceMappingURL=style.css.map */
