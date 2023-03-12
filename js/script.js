@@ -1,4 +1,4 @@
-import { startTimer, delayTimer, getElapsedTime } from "./timer.js";
+import { startTimer, delayTimer } from "./timer.js";
 
 // setTimeout(() => {
 //     console.log(getElapsedTime(), "s1");
@@ -71,9 +71,9 @@ function setNumbers() {
 
         submitBtns[round].addEventListener("click", function () {
             let inputQstn = inputs[round].value;
-            // if (!inputs[round].value) {
-            //     return;
-            // }
+            if (!inputs[round].value) {
+                return;
+            }
             // console.log(inputQstn, answer[round]);
             if (Number(inputQstn) === Number(answer[round])) {
                 // console.log("yea!");
@@ -93,13 +93,14 @@ function calc(str) {
 }
 
 function changeSide(round) {
-    console.log("=====================")
+    console.log("=====================");
     switch (round) {
         case 0:
             main.style.transform = "rotateX(260deg) rotateZ(-179deg)";
 
             setTimeout(() => {
                 main.style.transform = "rotateX(260deg) rotateZ(-170deg)";
+                inputs[round].value = "";
                 inputs[round + 1].focus();
             }, 700);
 
@@ -111,12 +112,17 @@ function changeSide(round) {
             setTimeout(() => {
                 main.style.transform =
                     "rotateX(185deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px)";
+                inputs[round].value = "";
                 inputs[round + 1].focus();
             }, 750);
 
             disableEnableInputs(round);
             break;
         default:
+            delayTimer(round);
+            submitBtns[round].classList.remove("submit-btn-effects");
+            submitBtns[round].disabled = true;
+            inputs[round].disabled = true;
             endGameWin();
             break;
     }
