@@ -138,8 +138,8 @@ main {
             padding: 5px;
             margin: 10px;
             background: var(--background-color);
-            
-            &::selection{
+
+            &::selection {
                 background: var(--game-color);
                 color: var(--background-color);
             }

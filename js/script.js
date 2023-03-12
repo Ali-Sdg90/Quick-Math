@@ -1,5 +1,21 @@
-const sideTimer = document.querySelector(".timer-side span");
-const gameTimer = document.querySelector(".timer-game span");
+import { startTimer, delayTimer, getElapsedTime } from "./timer.js";
+
+// setTimeout(() => {
+//     console.log(getElapsedTime(), "s1");
+// }, 500);
+
+// setTimeout(() => {
+//     delayTimer();
+// }, 600);
+
+// setTimeout(() => {
+//     startTimer();
+// }, 1000);
+
+// setTimeout(() => {
+//     console.log(getElapsedTime(), "s2");
+// }, 1100);
+
 const firstNumbers = document.querySelectorAll(".first-number");
 const operations = document.querySelectorAll(".operation");
 const secondNumbers = document.querySelectorAll(".second-number");
@@ -11,6 +27,7 @@ const sideHealthLost = [0, 0, 0];
 
 setTimeout(() => {
     setNumbers();
+    startTimer();
 }, 1000);
 
 function setNumbers() {
@@ -54,15 +71,15 @@ function setNumbers() {
 
         submitBtns[round].addEventListener("click", function () {
             let inputQstn = inputs[round].value;
-            if (!inputs[round].value) {
-                return;
-            }
-            console.log(inputQstn, answer[round]);
+            // if (!inputs[round].value) {
+            //     return;
+            // }
+            // console.log(inputQstn, answer[round]);
             if (Number(inputQstn) === Number(answer[round])) {
-                console.log("yea!");
+                // console.log("yea!");
                 changeSide(round);
             } else {
-                console.log("NOO!");
+                // console.log("NOO!");
                 wrongAnimation(round);
             }
         });
@@ -76,6 +93,7 @@ function calc(str) {
 }
 
 function changeSide(round) {
+    console.log("=====================")
     switch (round) {
         case 0:
             main.style.transform = "rotateX(260deg) rotateZ(-179deg)";
@@ -90,7 +108,6 @@ function changeSide(round) {
         case 1:
             main.style.transform =
                 "rotateX(181deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px)";
-
             setTimeout(() => {
                 main.style.transform =
                     "rotateX(185deg) rotateZ(-179deg) rotateY(5deg) translate(0, -200px)";
@@ -106,6 +123,7 @@ function changeSide(round) {
 }
 
 function disableEnableInputs(round) {
+    delayTimer(round);
     submitBtns[round].classList.remove("submit-btn-effects");
     submitBtns[round + 1].classList.add("submit-btn-effects");
     submitBtns[round].disabled = true;
@@ -156,27 +174,6 @@ function changeColor() {
     `;
 }
 
-// Game Timer
-
-let startTime;
-let elapsedTime = 0;
-let timerInterval;
-
-startTimer();
-
-function startTimer() {
-    startTime = new Date();
-    timerInterval = setInterval(updateElapsedTime, 100);
-}
-
-function pauseTimer() {
-    clearInterval(timerInterval);
-}
-
-function updateElapsedTime() {
-    elapsedTime = new Date() - startTime;
-}
-
-function getElapsedTime() {
-    return elapsedTime;
+function endGameWin() {
+    console.log("ENDGAME-WIN");
 }
