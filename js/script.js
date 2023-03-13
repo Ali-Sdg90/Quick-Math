@@ -1,20 +1,4 @@
-import { startTimer, delayTimer } from "./timer.js";
-
-// setTimeout(() => {
-//     console.log(getElapsedTime(), "s1");
-// }, 500);
-
-// setTimeout(() => {
-//     delayTimer();
-// }, 600);
-
-// setTimeout(() => {
-//     startTimer();
-// }, 1000);
-
-// setTimeout(() => {
-//     console.log(getElapsedTime(), "s2");
-// }, 1100);
+import { startTimer, delayTimer, sideSaves, sideSavesSum } from "./timer.js";
 
 const firstNumbers = document.querySelectorAll(".first-number");
 const operations = document.querySelectorAll(".operation");
@@ -27,7 +11,7 @@ const sideHealthLost = [0, 0, 0];
 
 setTimeout(() => {
     setNumbers();
-    startTimer();
+    // startTimer();
 }, 1000);
 
 function setNumbers() {
