@@ -1,11 +1,6 @@
-import {
-    startTimer,
-    delayTimer,
-    secondConverter,
-    stopIteration,
-    sideSaves,
-    sideSavesSum,
-} from "./timer.js";
+import { startTimer, delayTimer } from "./timer.js";
+
+import endGameWin from "./endScreen.js";
 
 const firstNumbers = document.querySelectorAll(".first-number");
 const operations = document.querySelectorAll(".operation");
@@ -15,22 +10,6 @@ const submitBtns = document.querySelectorAll(".submit-btn");
 const sideHealthcircles = document.querySelectorAll(".health-bar__blocks");
 const main = document.querySelector("main");
 const sideHealthLost = [0, 0, 0];
-
-const endScreen = document.querySelector(".end-screen");
-const endScreenRoundTimes = document.querySelectorAll(
-    ".end-screen__round-timer"
-);
-const endScreenTotlaTimes = document.querySelector(".end-screen__total-timer");
-const endScreenHealths = document.querySelectorAll(
-    ".end-screen__health__block"
-);
-const endScreenTotalHealths = document.querySelector(
-    ".end-screen__total-health"
-);
-const endScreenquestions = document.querySelectorAll(".end-screen__question");
-const endScreenTotalquestions = document.querySelector(
-    ".end-screen__total-question"
-);
 
 setTimeout(() => {
     setNumbers();
@@ -194,30 +173,4 @@ setTimeout(() => {
     }
 }, 1100);
 
-// endGameWin();
-function endGameWin() {
-    stopIteration();
-    endScreen.style.display = "grid";
-    console.log("ENDGAME-WIN");
-    document.querySelector(".headder").textContent = "Results";
-    for (let round = 0; round < 3; round++) {
-        endScreenRoundTimes[round].textContent = secondConverter(
-            sideSaves[round]
-        );
-        for (
-            let healthCont = 0;
-            healthCont < sideHealthLost[round];
-            healthCont++
-        ) {
-            endScreenHealths[3 * round + healthCont].classList.add(
-                "lost-health"
-            );
-        }
-
-        endScreenTotalHealths.textContent = `${
-            9 - (sideHealthLost[0] + sideHealthLost[1] + sideHealthLost[2])
-        } / 9`;
-
-        endScreenTotlaTimes.textContent = secondConverter(sideSavesSum);
-    }
-}
+export { sideHealthLost };
