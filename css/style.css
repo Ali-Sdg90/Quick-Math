@@ -213,12 +213,18 @@ main {
 
 .end-screen {
   display: none;
-  box-shadow: inset 0px 0px 400px 340px var(--background-color);
-  width: 100%;
-  height: 100vh;
-  padding: 110px 200px;
-  position: relative;
+  opacity: 0;
+  box-shadow: inset 0px 0px 600px 250px var(--background-color);
+  width: 882px;
+  width: 900px;
+  height: 535px;
+  height: 490px;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
+  transition: opacity 0.3s;
   grid-template-columns: 1fr 1fr 2fr 2fr;
   grid-template-rows: repeat(5, 1fr);
 }
@@ -234,4 +240,35 @@ main {
   width: 40px;
   height: 40px;
   margin: 8px;
+}
+.end-screen__question {
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+}
+
+.end-screen-btns {
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  transition: bottom 400ms 100ms;
+}
+.end-screen-btns button {
+  width: 250px;
+  height: 60px;
+  border-radius: 5px;
+  border: 2px solid var(--game-color);
+  background: var(--background-color);
+  box-shadow: 0 3px 3px var(--line-color);
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+.end-screen-btns button:active {
+  box-shadow: 0 1px 3px var(--line-color);
+  transform: translate(0, 2px);
 }/*# sourceMappingURL=style.css.map */

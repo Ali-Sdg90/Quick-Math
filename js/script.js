@@ -15,6 +15,7 @@ const submitBtns = document.querySelectorAll(".submit-btn");
 const sideHealthcircles = document.querySelectorAll(".health-bar__blocks");
 const main = document.querySelector("main");
 const sideHealthLost = [0, 0, 0];
+const saveQuestions = [];
 
 const endScreen = document.querySelector(".end-screen");
 const endScreenRoundTimes = document.querySelectorAll(
@@ -31,6 +32,7 @@ const endScreenquestions = document.querySelectorAll(".end-screen__question");
 const endScreenTotalquestions = document.querySelector(
     ".end-screen__total-question"
 );
+const endScreenBtns = document.querySelector(".end-screen-btns");
 
 setTimeout(() => {
     setNumbers();
@@ -64,16 +66,15 @@ function setNumbers() {
                 break;
         }
         operations[round].textContent = ransdNum;
-        calcStr += ransdNum;
+        calcStr += "  " + ransdNum;
 
         do {
             ransdNum = 100 - Math.ceil(Math.random() * 200);
         } while (ransdNum === "0");
-        calcStr += ransdNum;
+        calcStr += "  " + ransdNum;
         secondNumbers[round].textContent = ransdNum;
 
-        calcStr = calc(calcStr.replace("--", "+"));
-        answer[round] = parseInt(calcStr);
+        answer[round] = parseInt(calc(calcStr.replace("--", "+")));
 
         submitBtns[round].addEventListener("click", function () {
             let inputQstn = inputs[round].value;
@@ -90,6 +91,9 @@ function setNumbers() {
             }
         });
         console.log(calc(calcStr), answer[round]);
+
+        console.log("-->", calcStr);
+        saveQuestions.push(calcStrConverter(calcStr, answer[round]));
     }
 }
 
@@ -130,7 +134,7 @@ function changeSide(round) {
             submitBtns[round].disabled = true;
             inputs[round].disabled = true;
             setTimeout(() => {
-                endGameWin();
+                endGame();
             }, 700);
             break;
     }
@@ -194,16 +198,31 @@ setTimeout(() => {
     }
 }, 1100);
 
-// endGameWin();
-function endGameWin() {
+function calcStrConverter(calcStr, answer) {
+    calcStr = calcStr.replace("*", "×");
+    calcStr = calcStr.replace("/", "÷");
+
+    return calcStr + " = " + answer;
+}
+
+// endGame();
+function endGame() {
     stopIteration();
     endScreen.style.display = "grid";
-    console.log("ENDGAME-WIN");
+    setTimeout(() => {
+        endScreen.style.opacity = "1";
+    }, 100);
+    endScreenBtns.style.bottom = "3px";
+
+    console.log("ENDGAME");
+
     document.querySelector(".headder").textContent = "Results";
     for (let round = 0; round < 3; round++) {
         endScreenRoundTimes[round].textContent = secondConverter(
             sideSaves[round]
         );
+        endScreenTotlaTimes.textContent = secondConverter(sideSavesSum);
+
         for (
             let healthCont = 0;
             healthCont < sideHealthLost[round];
@@ -213,11 +232,10 @@ function endGameWin() {
                 "lost-health"
             );
         }
-
         endScreenTotalHealths.textContent = `${
             9 - (sideHealthLost[0] + sideHealthLost[1] + sideHealthLost[2])
         } / 9`;
 
-        endScreenTotlaTimes.textContent = secondConverter(sideSavesSum);
+        endScreenquestions[round].textContent = saveQuestions[round];
     }
 }

@@ -25,9 +25,8 @@ function secondConverter(second) {
 
 function stopIteration() {
     clearInterval(timerInterval);
-    console.log("STOPED");
-    sideTimer.textContent = "--"
-    gameTimer.textContent = "--"
+    sideTimer.textContent = "--";
+    gameTimer.textContent = "--";
 }
 
 function delayTimer(round) {
