@@ -118,12 +118,6 @@ main {
   height: 100%;
   border-radius: 50%;
 }
-.side1 .health-bar .lost-health,
-.side2 .health-bar .lost-health,
-.side3 .health-bar .lost-health {
-  background: var(--line-color);
-  box-shadow: 0 0 5px var(--background-color);
-}
 .side1 .solve-me,
 .side2 .solve-me,
 .side3 .solve-me {
@@ -193,6 +187,11 @@ main {
   letter-spacing: 3px;
 }
 
+.lost-health {
+  background: var(--line-color);
+  box-shadow: 0 0 5px var(--background-color);
+}
+
 .side1 {
   width: 400px;
   transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
@@ -213,7 +212,26 @@ main {
 }
 
 .end-screen {
-  background: red;
+  display: none;
+  box-shadow: inset 0px 0px 400px 340px var(--background-color);
   width: 100%;
   height: 100vh;
+  padding: 110px 200px;
+  position: relative;
+  z-index: 1;
+  grid-template-columns: 1fr 1fr 2fr 2fr;
+  grid-template-rows: repeat(5, 1fr);
+}
+.end-screen div {
+  border: 1px solid var(--line-color);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.end-screen__health__block {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 8px;
 }/*# sourceMappingURL=style.css.map */

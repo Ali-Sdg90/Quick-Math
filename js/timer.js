@@ -14,10 +14,20 @@ function startTimer() {
 
 function updateElapsedTime() {
     elapsedTime = new Date() - startTime;
-    sideTimer.textContent = (elapsedTime / 1000).toFixed(1) + " s";
+    sideTimer.textContent = secondConverter(elapsedTime);
 
-    gameTimer.textContent =
-        ((elapsedTime + sideSavesSum) / 1000).toFixed(1) + " s";
+    gameTimer.textContent = secondConverter(elapsedTime + sideSavesSum);
+}
+
+function secondConverter(second) {
+    return (second / 1000).toFixed(1) + " s";
+}
+
+function stopIteration() {
+    clearInterval(timerInterval);
+    console.log("STOPED");
+    sideTimer.textContent = "--"
+    gameTimer.textContent = "--"
 }
 
 function delayTimer(round) {
@@ -33,4 +43,11 @@ function delayTimer(round) {
     }, 700);
 }
 
-export { startTimer, delayTimer, sideSaves, sideSavesSum };
+export {
+    startTimer,
+    delayTimer,
+    secondConverter,
+    stopIteration,
+    sideSaves,
+    sideSavesSum,
+};
