@@ -138,6 +138,12 @@ main {
                 background: var(--game-color);
                 color: var(--background-color);
             }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
         }
     }
 
@@ -193,15 +199,20 @@ main {
     opacity: 0;
     // opacity: 1;
 
-    // box-shadow: inset 0px 0px 400px 340px var(--background-color);
-    box-shadow: inset 0px 0px 600px 250px var(--background-color);
+    // box-shadow: inset 0px 0px 600px 250px var(--background-color);
+    box-shadow: inset 0px 0px 600px 260px var(--background-color);
 
-    width: 882px;
+    // width: 882px;
     width: 900px;
-    height: 535px;
-    height: 490px;
+    // height: 535px;
+    // height: 490px;
+
+    height: 550px;
+    padding-bottom: 60px;
+
+
     position: absolute;
-    top: 48%;
+    top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -241,6 +252,7 @@ main {
     @include flex-center-childs();
     gap: 50px;
     transition: bottom 400ms 100ms;
+    z-index: 2;
 
     button {
         width: 250px;

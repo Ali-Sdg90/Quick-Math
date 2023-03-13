@@ -134,7 +134,7 @@ function changeSide(round) {
             submitBtns[round].disabled = true;
             inputs[round].disabled = true;
             setTimeout(() => {
-                endGame();
+                endGame(3);
             }, 700);
             break;
     }
@@ -153,14 +153,16 @@ function disableEnableInputs(round) {
 function wrongAnimation(round) {
     inputs[round].classList.add("shake");
     if (sideHealthLost[round] === 2) {
-        endGameLose();
-    } else {
-        sideHealthLost[round]++;
-        console.log(sideHealthLost[round]);
-        for (let health = 0; health < sideHealthLost[round]; health++) {
-            sideHealthcircles[round * 3 + health].classList.add("lost-health");
-        }
+        setTimeout(() => {
+            lostAllHealths(round);
+        }, 100);
     }
+
+    sideHealthLost[round]++;
+    for (let health = 0; health < sideHealthLost[round]; health++) {
+        sideHealthcircles[round * 3 + health].classList.add("lost-health");
+    }
+
     inputs[round].addEventListener("animationend", function () {
         inputs[round].value = "";
         inputs[round].classList.remove("shake");
@@ -205,8 +207,25 @@ function calcStrConverter(calcStr, answer) {
     return calcStr + " = " + answer;
 }
 
+function lostAllHealths(round) {
+    delayTimer(round);
+    for (let roundCounter = round; roundCounter < 3; roundCounter++) {
+        for (let healthBlock = 0; healthBlock < 3; healthBlock++) {
+            sideHealthcircles[roundCounter * 3 + healthBlock].classList.add(
+                "lost-health"
+            );
+        }
+        sideHealthLost[roundCounter] = 3;
+        endScreenquestions[roundCounter].style.textDecoration = "line-through";
+    }
+
+    setTimeout(() => {
+        endGame(round);
+    }, 700);
+}
+
 // endGame();
-function endGame() {
+function endGame(passQustions) {
     stopIteration();
     endScreen.style.display = "grid";
     setTimeout(() => {
@@ -237,5 +256,6 @@ function endGame() {
         } / 9`;
 
         endScreenquestions[round].textContent = saveQuestions[round];
+        endScreenTotalquestions.textContent = `${passQustions} / 3`;
     }
 }

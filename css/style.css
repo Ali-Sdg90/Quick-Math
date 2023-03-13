@@ -161,6 +161,14 @@ main {
   background: var(--game-color);
   color: var(--background-color);
 }
+.side1 .quiz input::-webkit-outer-spin-button, .side1 .quiz input::-webkit-inner-spin-button,
+.side2 .quiz input::-webkit-outer-spin-button,
+.side2 .quiz input::-webkit-inner-spin-button,
+.side3 .quiz input::-webkit-outer-spin-button,
+.side3 .quiz input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .side1 .submit-btn,
 .side2 .submit-btn,
 .side3 .submit-btn {
@@ -214,13 +222,12 @@ main {
 .end-screen {
   display: none;
   opacity: 0;
-  box-shadow: inset 0px 0px 600px 250px var(--background-color);
-  width: 882px;
+  box-shadow: inset 0px 0px 600px 260px var(--background-color);
   width: 900px;
-  height: 535px;
-  height: 490px;
+  height: 550px;
+  padding-bottom: 60px;
   position: absolute;
-  top: 48%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -257,6 +264,7 @@ main {
   align-items: center;
   gap: 50px;
   transition: bottom 400ms 100ms;
+  z-index: 2;
 }
 .end-screen-btns button {
   width: 250px;
