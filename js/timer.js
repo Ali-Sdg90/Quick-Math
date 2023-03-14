@@ -15,7 +15,6 @@ function startTimer() {
 function updateElapsedTime() {
     elapsedTime = new Date() - startTime;
     sideTimer.textContent = secondConverter(elapsedTime);
-
     gameTimer.textContent = secondConverter(elapsedTime + sideSavesSum);
 }
 
@@ -33,8 +32,6 @@ function delayTimer(round) {
     sideSaves[round] = new Date() - startTime;
     sideSavesSum += sideSaves[round];
 
-    // console.log(sideSaves);
-
     clearInterval(timerInterval);
     setTimeout(() => {
         startTime = new Date();
@@ -45,8 +42,8 @@ function delayTimer(round) {
 export {
     startTimer,
     delayTimer,
-    secondConverter,
     stopIteration,
-    sideSaves,
+    secondConverter,
     sideSavesSum,
+    sideSaves,
 };

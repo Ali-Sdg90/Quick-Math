@@ -1,12 +1,13 @@
 import {
     startTimer,
     delayTimer,
-    secondConverter,
     stopIteration,
-    sideSaves,
+    secondConverter,
     sideSavesSum,
+    sideSaves,
 } from "./timer.js";
 
+const readyScreen = document.querySelector(".ready-screen");
 const firstNumbers = document.querySelectorAll(".first-number");
 const operations = document.querySelectorAll(".operation");
 const secondNumbers = document.querySelectorAll(".second-number");
@@ -15,7 +16,10 @@ const submitBtns = document.querySelectorAll(".submit-btn");
 const sideHealthcircles = document.querySelectorAll(".health-bar__blocks");
 const main = document.querySelector("main");
 const sideHealthLost = [0, 0, 0];
+const answers = ["", "", ""];
 const saveQuestions = [];
+let showAns = true;
+let showConsole = true;
 
 const endScreen = document.querySelector(".end-screen");
 const endScreenRoundTimes = document.querySelectorAll(
@@ -34,12 +38,24 @@ const endScreenTotalquestions = document.querySelector(
 );
 const endScreenBtns = document.querySelector(".end-screen-btns");
 
-setTimeout(() => {
-    setNumbers();
-    startTimer();
-}, 1000);
+document
+    .querySelector(".ready-screen__btn")
+    .addEventListener("click", function () {
+        readyScreen.style.opacity = 0;
+        readyScreen.addEventListener("transitionend", function () {
+            readyScreen.style.display = "none";
+            setTimeout(() => {
+                setNumbers();
+                startTimer();
+                if (showAns) {
+                    for (let round = 0; round < 3; round++) {
+                        inputs[round].value = answers[round];
+                    }
+                }
+            }, 400);
+        });
+    });
 
-const answer = ["", "", ""];
 function setNumbers() {
     for (let round = 0; round < 3; round++) {
         let ransdNum = "0";
@@ -69,20 +85,24 @@ function setNumbers() {
         calcStr += "  " + ransdNum;
 
         do {
-            ransdNum = 100 - Math.ceil(Math.random() * 200);
+            if (calcStr.charAt(calcStr.length - 1) === "*") {
+                ransdNum = (10 - Math.ceil(Math.random() * 20)) * 10;
+            } else {
+                ransdNum = 100 - Math.ceil(Math.random() * 200);
+            }
         } while (ransdNum === "0");
         calcStr += "  " + ransdNum;
         secondNumbers[round].textContent = ransdNum;
 
-        answer[round] = parseInt(calc(calcStr.replace("--", "+")));
+        answers[round] = parseInt(calc(calcStr.replace("--", "+")));
 
         submitBtns[round].addEventListener("click", function () {
             let inputQstn = inputs[round].value;
             if (!inputs[round].value) {
                 return;
             }
-            // console.log(inputQstn, answer[round]);
-            if (Number(inputQstn) === Number(answer[round])) {
+            // console.log(inputQstn, answers[round]);
+            if (Number(inputQstn) === Number(answers[round])) {
                 // console.log("yea!");
                 changeSide(round);
             } else {
@@ -90,10 +110,10 @@ function setNumbers() {
                 wrongAnimation(round);
             }
         });
-        console.log(calc(calcStr), answer[round]);
+        console.log(calc(calcStr), answers[round]);
 
         console.log("-->", calcStr);
-        saveQuestions.push(calcStrConverter(calcStr, answer[round]));
+        saveQuestions.push(calcStrConverter(calcStr, answers[round]));
     }
 }
 
@@ -194,17 +214,11 @@ function changeColor() {
     `;
 }
 
-setTimeout(() => {
-    for (let round = 0; round < 3; round++) {
-        inputs[round].value = answer[round];
-    }
-}, 1100);
-
-function calcStrConverter(calcStr, answer) {
+function calcStrConverter(calcStr, answers) {
     calcStr = calcStr.replace("*", "×");
     calcStr = calcStr.replace("/", "÷");
 
-    return calcStr + " = " + answer;
+    return calcStr + " = " + answers;
 }
 
 function lostAllHealths(round) {

@@ -24,9 +24,9 @@
 }
 
 :root {
-  --background-color: red;
-  --game-color: green;
-  --line-color: blue;
+  --background-color: black;
+  --game-color: black;
+  --line-color: black;
 }
 
 ::selection {
@@ -71,6 +71,48 @@ h1 {
   justify-content: center;
   align-items: center;
   text-shadow: -0.28vh 0 rgba(255, 0, 251, 0.25), 0.28vh 0 rgba(255, 0, 0, 0.25);
+}
+
+.ready-screen {
+  box-shadow: inset 0px 0px 600px 260px var(--background-color);
+  width: 900px;
+  height: 550px;
+  padding-bottom: 60px;
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 0.3s;
+}
+.ready-screen__text {
+  font-size: 3rem;
+  text-shadow: 0 2px 4px var(--line-color);
+}
+.ready-screen__btn {
+  font-size: 1.5rem;
+  padding: 15px;
+  width: 170px;
+  margin-top: 60px;
+  border-radius: 5px;
+  background: var(--game-color);
+  cursor: pointer;
+  box-shadow: 0 3px 3px var(--line-color);
+  border: 2px solid var(--line-color);
+  transition: letter-spacing 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.ready-screen__btn:hover {
+  letter-spacing: 1px;
+}
+.ready-screen__btn:active {
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px var(--line-color), inset 0 0 10px var(--line-color);
+  transform: translate(0, 2px);
 }
 
 main {
@@ -175,7 +217,7 @@ main {
   background: var(--background-color);
   margin: 10px;
   border-radius: 5px;
-  transition: 0.2s;
+  transition: letter-spacing 0.2s;
   font-size: 1.1rem;
   letter-spacing: 1.5px;
 }

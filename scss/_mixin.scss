@@ -3,3 +3,16 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin ready-end-screen() {
+    box-shadow: inset 0px 0px 600px 260px var(--background-color);
+    width: 900px;
+    height: 550px;
+    padding-bottom: 60px;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: opacity 0.3s;
+}
