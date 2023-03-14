@@ -24,6 +24,9 @@ function secondConverter(second) {
 
 function stopIteration() {
     clearInterval(timerInterval);
+    setTimeout(() => {
+        clearInterval(timerInterval);
+    }, 5000);
     sideTimer.textContent = "--";
     gameTimer.textContent = "--";
 }

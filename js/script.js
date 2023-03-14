@@ -18,8 +18,10 @@ const main = document.querySelector("main");
 const sideHealthLost = [0, 0, 0];
 const answers = ["", "", ""];
 const saveQuestions = [];
-let showAns = true;
-let showConsole = true;
+
+const readyBtn = document.querySelector(".ready-screen__ready");
+const showAnsInput = document.querySelector("#show-ans");
+const alwaysReadyInput = document.querySelector("#always-ready");
 
 const endScreen = document.querySelector(".end-screen");
 const endScreenRoundTimes = document.querySelectorAll(
@@ -38,22 +40,90 @@ const endScreenTotalquestions = document.querySelector(
 );
 const endScreenBtns = document.querySelector(".end-screen-btns");
 
+let showAns = true; //temp true
+let alwaysReady = false;
+let enterCounter = 0;
+
+if (localStorage.getItem("showAns") === "true") {
+    showAns = true;
+    showAnsInput.checked = showAns;
+    showAnsLoop();
+}
+if (localStorage.getItem("alwaysReady") === "true") {
+    alwaysReady = true;
+    alwaysReadyInput.checked = alwaysReady;
+    readyBtn;
+}
+
+function showAnsLoop() {
+    for (let round = 0; round < 3; round++) {
+        inputs[round].placeholder = answers[round];
+    }
+}
+
+readyBtn.addEventListener("click", function () {
+    readyScreen.style.opacity = 0;
+    readyScreen.addEventListener("transitionend", function () {
+        readyScreen.style.display = "none";
+        setTimeout(() => {
+            setNumbers();
+            startTimer();
+            if (showAns) {
+                showAnsLoop();
+            }
+            readyBtn.disabled = true;
+        }, 400);
+    });
+});
+
+// Dosn't work for some reason ...
+function showAnsAndAlwaysReady(checkfor, input, localStorageName) {
+    if (checkfor) {
+        checkfor = false;
+        input.checked = false;
+        console.log("OFF");
+        localStorage.setItem(localStorageName, checkfor);
+    } else {
+        console.log("ON");
+        input.checked = true;
+        checkfor = true;
+        localStorage.setItem(localStorageName, checkfor);
+    }
+}
+
 document
-    .querySelector(".ready-screen__btn")
+    .querySelector(".setting-btns__show-ans")
     .addEventListener("click", function () {
-        readyScreen.style.opacity = 0;
-        readyScreen.addEventListener("transitionend", function () {
-            readyScreen.style.display = "none";
-            setTimeout(() => {
-                setNumbers();
-                startTimer();
-                if (showAns) {
-                    for (let round = 0; round < 3; round++) {
-                        inputs[round].value = answers[round];
-                    }
-                }
-            }, 400);
-        });
+        if (showAns) {
+            showAns = false;
+            showAnsInput.checked = false;
+            localStorage.setItem("showAns", showAns);
+            showAnsLoop();
+        } else {
+            showAnsInput.checked = true;
+            showAns = true;
+            localStorage.setItem("showAns", showAns);
+            for (let round = 0; round < 3; round++) {
+                inputs[round].placeholder = answers[round];
+            }
+        }
+    });
+
+// localStorage.clear();
+
+document
+    .querySelector(".setting-btns__always-ready")
+    .addEventListener("click", function () {
+        // showAnsAndAlwaysReady(alwaysReady, alwaysReadyInput, "alwaysReady");
+        if (alwaysReady) {
+            alwaysReady = false;
+            alwaysReadyInput.checked = false;
+            localStorage.setItem("alwaysReady", alwaysReady);
+        } else {
+            alwaysReadyInput.checked = true;
+            alwaysReady = true;
+            localStorage.setItem("alwaysReady", alwaysReady);
+        }
     });
 
 function setNumbers() {
@@ -190,13 +260,33 @@ function wrongAnimation(round) {
     });
 }
 
+// if spam enter timer will broke ...
 document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-        submitBtns.forEach(function (submitBtn) {
-            submitBtn.dispatchEvent(new Event("click"));
-        });
+        if (!saveQuestions.length) {
+            readyBtn.dispatchEvent(new Event("click"));
+            // console.log(submitBtns[enterCounter]);
+            // } else if (enterCounter < 3 && !submitBtns[enterCounter].disabled) {
+        } else {
+            submitBtns.forEach(function (submitBtn) {
+                submitBtn.dispatchEvent(new Event("click"));
+            });
+        }
+        // console.log(
+        //     enterCounter,
+        //     submitBtns[enterCounter + 1].disabled,
+        //     submitBtns[enterCounter + 1]
+        // );
+
+        // enterCounter++;
     }
 });
+
+document
+    .querySelector(".setting-btns__change-color")
+    .addEventListener("click", function () {
+        changeColor();
+    });
 
 changeColor();
 function changeColor() {

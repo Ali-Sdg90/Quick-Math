@@ -94,7 +94,7 @@ h1 {
   font-size: 3rem;
   text-shadow: 0 2px 4px var(--line-color);
 }
-.ready-screen__btn {
+.ready-screen__ready {
   font-size: 1.5rem;
   padding: 15px;
   width: 170px;
@@ -106,13 +106,44 @@ h1 {
   border: 2px solid var(--line-color);
   transition: letter-spacing 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.ready-screen__btn:hover {
+.ready-screen__ready:hover {
   letter-spacing: 1px;
 }
-.ready-screen__btn:active {
+.ready-screen__ready:active {
   letter-spacing: 0.5px;
   box-shadow: 0 1px 3px var(--line-color), inset 0 0 10px var(--line-color);
   transform: translate(0, 2px);
+}
+
+.setting-btns {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  transition: bottom 400ms 100ms;
+  z-index: 2;
+  bottom: 3px;
+}
+.setting-btns button {
+  width: 250px;
+  height: 60px;
+  border-radius: 5px;
+  border: 2px solid var(--game-color);
+  background: var(--background-color);
+  box-shadow: 0 3px 3px var(--line-color);
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+.setting-btns button:active {
+  box-shadow: 0 1px 3px var(--line-color);
+  transform: translate(0, 2px);
+}
+.setting-btns .checkbox-inp {
+  transform: scale(1.4) translate(3px, 1px);
 }
 
 main {
@@ -297,7 +328,6 @@ main {
 
 .end-screen-btns {
   position: absolute;
-  bottom: -200px;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -307,6 +337,7 @@ main {
   gap: 50px;
   transition: bottom 400ms 100ms;
   z-index: 2;
+  bottom: -200px;
 }
 .end-screen-btns button {
   width: 250px;

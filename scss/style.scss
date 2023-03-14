@@ -68,7 +68,7 @@ h1 {
         text-shadow: 0 2px 4px var(--line-color);
     }
 
-    &__btn {
+    &__ready {
         font-size: 1.5rem;
         padding: 15px;
         width: 170px;
@@ -90,6 +90,14 @@ h1 {
                 inset 0 0 10px var(--line-color);
             transform: translate(0, 2px);
         }
+    }
+}
+
+.setting-btns {
+    @include bottomBtns(3px);
+
+    .checkbox-inp {
+        transform: scale(1.4) translate(3px, 1px);
     }
 }
 
@@ -262,31 +270,5 @@ main {
 }
 
 .end-screen-btns {
-    position: absolute;
-    // bottom: 3px;
-    bottom: -200px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    // border: 1px solid red;
-    width: 100%;
-    @include flex-center-childs();
-    gap: 50px;
-    transition: bottom 400ms 100ms;
-    z-index: 2;
-
-    button {
-        width: 250px;
-        height: 60px;
-        border-radius: 5px;
-        border: 2px solid var(--game-color);
-        background: var(--background-color);
-        box-shadow: 0 3px 3px var(--line-color);
-        transition: transform 0.15s, box-shadow 0.15s;
-        cursor: pointer;
-
-        &:active {
-            box-shadow: 0 1px 3px var(--line-color);
-            transform: translate(0, 2px);
-        }
-    }
+    @include bottomBtns(-200px);
 }
