@@ -1,0 +1,28 @@
+header {
+    position: absolute;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    background: var(--background-color);
+    z-index: 2;
+}
+
+.timer-side,
+.timer-game {
+    @include flex-center-childs();
+    flex-direction: column;
+
+    div,
+    span {
+        font-size: 3.37vh;
+        padding: 0.56vh;
+    }
+}
+
+h1 {
+    font-size: 5.61vh;
+    @include flex-center-childs();
+    text-shadow: 0.28vh 0 rgba(98, 0, 255, 0.25),
+        -0.28vh 0 rgba(255, 0, 0, 0.25);
+}

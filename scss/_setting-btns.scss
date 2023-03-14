@@ -1,0 +1,43 @@
+.setting-btns {
+    border-top: 1px solid var(--game-color);
+    @include bottomBtns(-300px);
+    padding-top: 20px;
+    background: var(--game-color);
+    box-shadow: inset 0px 0px 70px 80px var(--background-color);
+    transition: bottom 0.3s, $change-theme, $change-theme-box-shadow;
+
+    z-index: 4;
+
+    &__nav {
+        position: absolute;
+        top: -30px;
+        border: 1px solid var(--line-color);
+        background: var(--game-color);
+        color: var(--background-color);
+        width: 45px;
+        height: 30px;
+        // padding: 5px;
+        border-radius: 5px 5px 0 0;
+        opacity: 0.3;
+        cursor: pointer;
+        @include flex-center-childs();
+        transition: $change-theme, opacity 0.2s;
+
+        &:hover {
+            opacity: 1;
+            transition: $change-theme, opacity 0.1s;
+        }
+
+        div {
+            transform: rotate(-90deg);
+            font-weight: 600;
+            font-size: 1.6rem;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+    }
+
+    .checkbox-inp {
+        transform: scale(1.4) translate(3px, 1px);
+    }
+}
