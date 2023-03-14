@@ -41,13 +41,14 @@ const endScreenTotalquestions = document.querySelector(
 const endScreenBtns = document.querySelector(".end-screen-btns");
 
 let showAns = true; //temp true
+showAns = false;
+
 let alwaysReady = false;
-let enterCounter = 0;
 
 if (localStorage.getItem("showAns") === "true") {
     showAns = true;
     showAnsInput.checked = showAns;
-    showAnsLoop();
+    showAnsPlaceholders();
 }
 if (localStorage.getItem("alwaysReady") === "true") {
     alwaysReady = true;
@@ -55,25 +56,27 @@ if (localStorage.getItem("alwaysReady") === "true") {
     readyBtn;
 }
 
-function showAnsLoop() {
+function showAnsPlaceholders() {
     for (let round = 0; round < 3; round++) {
-        inputs[round].placeholder = answers[round];
+        if (showAns) {
+            inputs[round].placeholder = answers[round];
+        } else {
+            inputs[round].placeholder = "";
+        }
     }
 }
 
 readyBtn.addEventListener("click", function () {
     readyScreen.style.opacity = 0;
-    readyScreen.addEventListener("transitionend", function () {
+    setTimeout(() => {
         readyScreen.style.display = "none";
         setTimeout(() => {
             setNumbers();
             startTimer();
-            if (showAns) {
-                showAnsLoop();
-            }
+            showAnsPlaceholders();
             readyBtn.disabled = true;
         }, 400);
-    });
+    }, 300);
 });
 
 // Dosn't work for some reason ...
@@ -98,14 +101,13 @@ document
             showAns = false;
             showAnsInput.checked = false;
             localStorage.setItem("showAns", showAns);
-            showAnsLoop();
+            showAnsPlaceholders();
         } else {
             showAnsInput.checked = true;
             showAns = true;
             localStorage.setItem("showAns", showAns);
-            for (let round = 0; round < 3; round++) {
-                inputs[round].placeholder = answers[round];
-            }
+
+            showAnsPlaceholders();
         }
     });
 
