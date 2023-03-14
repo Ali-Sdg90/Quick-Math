@@ -22,6 +22,10 @@ const saveQuestions = [];
 const readyBtn = document.querySelector(".ready-screen__ready");
 const showAnsInput = document.querySelector("#show-ans");
 const alwaysReadyInput = document.querySelector("#always-ready");
+const settingBtns = document.querySelector(".setting-btns");
+const settingBtnsNav = document.querySelector(".setting-btns__nav");
+const settingBtnsNavChar = document.querySelector(".setting-btns__nav div");
+let settingBtnsNavCharOpen = false;
 
 const endScreen = document.querySelector(".end-screen");
 const endScreenRoundTimes = document.querySelectorAll(
@@ -40,7 +44,9 @@ const endScreenTotalquestions = document.querySelector(
 );
 const endScreenBtns = document.querySelector(".end-screen-btns");
 
-let showAns = true; //temp true
+// localStorage.clear();
+
+let showAns = false;
 showAns = false;
 
 let alwaysReady = false;
@@ -53,7 +59,13 @@ if (localStorage.getItem("showAns") === "true") {
 if (localStorage.getItem("alwaysReady") === "true") {
     alwaysReady = true;
     alwaysReadyInput.checked = alwaysReady;
-    readyBtn;
+    readyScreen.style.display = "none";
+    setTimeout(() => {
+        setNumbers();
+        startTimer();
+        showAnsPlaceholders();
+        inputs[0].focus();
+    }, 100);
 }
 
 function showAnsPlaceholders() {
@@ -75,57 +87,51 @@ readyBtn.addEventListener("click", function () {
             startTimer();
             showAnsPlaceholders();
             readyBtn.disabled = true;
+            inputs[0].focus();
         }, 400);
     }, 300);
+});
+
+settingBtnsNav.addEventListener("click", function () {
+    if (settingBtnsNavCharOpen) {
+        settingBtnsNavCharOpen = false;
+        settingBtns.style.bottom = "-300px";
+        settingBtnsNavChar.style.transform = `rotate(-90deg)`;
+    } else {
+        settingBtnsNavCharOpen = true;
+        settingBtns.style.bottom = "-200px";
+        settingBtnsNavChar.style.transform = `rotate(90deg)`;
+    }
 });
 
 // Dosn't work for some reason ...
 function showAnsAndAlwaysReady(checkfor, input, localStorageName) {
     if (checkfor) {
-        checkfor = false;
         input.checked = false;
-        console.log("OFF");
-        localStorage.setItem(localStorageName, checkfor);
+        localStorage.setItem(localStorageName, !checkfor);
+        return false;
     } else {
-        console.log("ON");
         input.checked = true;
-        checkfor = true;
-        localStorage.setItem(localStorageName, checkfor);
+        localStorage.setItem(localStorageName, !checkfor);
+        return true;
     }
 }
 
 document
     .querySelector(".setting-btns__show-ans")
     .addEventListener("click", function () {
-        if (showAns) {
-            showAns = false;
-            showAnsInput.checked = false;
-            localStorage.setItem("showAns", showAns);
-            showAnsPlaceholders();
-        } else {
-            showAnsInput.checked = true;
-            showAns = true;
-            localStorage.setItem("showAns", showAns);
-
-            showAnsPlaceholders();
-        }
+        showAns = showAnsAndAlwaysReady(showAns, showAnsInput, "showAns");
+        showAnsPlaceholders();
     });
-
-// localStorage.clear();
 
 document
     .querySelector(".setting-btns__always-ready")
     .addEventListener("click", function () {
-        // showAnsAndAlwaysReady(alwaysReady, alwaysReadyInput, "alwaysReady");
-        if (alwaysReady) {
-            alwaysReady = false;
-            alwaysReadyInput.checked = false;
-            localStorage.setItem("alwaysReady", alwaysReady);
-        } else {
-            alwaysReadyInput.checked = true;
-            alwaysReady = true;
-            localStorage.setItem("alwaysReady", alwaysReady);
-        }
+        alwaysReady = showAnsAndAlwaysReady(
+            alwaysReady,
+            alwaysReadyInput,
+            "alwaysReady"
+        );
     });
 
 function setNumbers() {
@@ -162,7 +168,7 @@ function setNumbers() {
             } else {
                 ransdNum = 100 - Math.ceil(Math.random() * 200);
             }
-        } while (ransdNum === "0");
+        } while (ransdNum === 0);
         calcStr += "  " + ransdNum;
         secondNumbers[round].textContent = ransdNum;
 
@@ -173,18 +179,21 @@ function setNumbers() {
             if (!inputs[round].value) {
                 return;
             }
-            // console.log(inputQstn, answers[round]);
             if (Number(inputQstn) === Number(answers[round])) {
-                // console.log("yea!");
+                console.log("Correct Answer!");
                 changeSide(round);
             } else {
-                // console.log("NOO!");
+                console.log("Wrong Answer!");
                 wrongAnimation(round);
             }
         });
-        console.log(calc(calcStr), answers[round]);
 
-        console.log("-->", calcStr);
+        console.log(
+            `R${round} : ${calcStr} = ${calc(calcStr).toFixed(2)} -> ${
+                answers[round]
+            }`
+        );
+
         saveQuestions.push(calcStrConverter(calcStr, answers[round]));
     }
 }
@@ -195,7 +204,6 @@ function calc(str) {
 }
 
 function changeSide(round) {
-    console.log("=====================");
     switch (round) {
         case 0:
             main.style.transform = "rotateX(260deg) rotateZ(-179deg)";
@@ -267,20 +275,11 @@ document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         if (!saveQuestions.length) {
             readyBtn.dispatchEvent(new Event("click"));
-            // console.log(submitBtns[enterCounter]);
-            // } else if (enterCounter < 3 && !submitBtns[enterCounter].disabled) {
         } else {
             submitBtns.forEach(function (submitBtn) {
                 submitBtn.dispatchEvent(new Event("click"));
             });
         }
-        // console.log(
-        //     enterCounter,
-        //     submitBtns[enterCounter + 1].disabled,
-        //     submitBtns[enterCounter + 1]
-        // );
-
-        // enterCounter++;
     }
 });
 
@@ -337,7 +336,7 @@ function endGame(passQustions) {
     setTimeout(() => {
         endScreen.style.opacity = "1";
     }, 100);
-    endScreenBtns.style.bottom = "3px";
+    endScreenBtns.style.bottom = "-200px";
 
     console.log("ENDGAME");
 

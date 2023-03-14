@@ -53,8 +53,8 @@ header {
 h1 {
     font-size: 5.61vh;
     @include flex-center-childs();
-    text-shadow: -0.28vh 0 rgba(255, 0, 251, 0.25),
-        0.28vh 0 rgba(255, 0, 0, 0.25);
+    text-shadow: 0.28vh 0 rgba(98, 0, 255, 0.25),
+        -0.28vh 0 rgba(255, 0, 0, 0.25);
 }
 
 .ready-screen {
@@ -64,7 +64,7 @@ h1 {
 
     &__text {
         font-size: 3rem;
-        text-shadow: 0 2px 4px var(--line-color);
+        text-shadow: 0 2px 5px var(--line-color);
     }
 
     &__ready {
@@ -94,25 +94,41 @@ h1 {
 }
 
 .setting-btns {
-    border: 1px solid red;
-    @include bottomBtns(3px);
+    border-top: 1px solid var(--game-color);
+    @include bottomBtns(-300px);
+    padding-top: 20px;
+    background: var(--game-color);
+    box-shadow: inset 0px 0px 70px 80px var(--background-color);
+    transition: bottom 0.3s, $change-theme, $change-theme-box-shadow;
+
     z-index: 4;
 
     &__nav {
         position: absolute;
-        top: -55px;
+        top: -30px;
         border: 1px solid var(--line-color);
         background: var(--game-color);
         color: var(--background-color);
-        transform: rotate(-90deg);
-        padding: 7px;
-        border-radius: 0 5px 5px 0;
-        // opacity: 0.3;
-        
+        width: 45px;
+        height: 30px;
+        // padding: 5px;
+        border-radius: 5px 5px 0 0;
+        opacity: 0.3;
+        cursor: pointer;
+        @include flex-center-childs();
+        transition: $change-theme, opacity 0.2s;
+
+        &:hover {
+            opacity: 1;
+            transition: $change-theme, opacity 0.1s;
+        }
+
         div {
-            font-weight: 900;
-            font-size: 1.7rem;
+            transform: rotate(-90deg);
+            font-weight: 600;
+            font-size: 1.6rem;
             font-family: sans-serif;
+            cursor: pointer;
         }
     }
 
@@ -224,14 +240,19 @@ main {
             cursor: pointer;
 
             &:hover {
-                letter-spacing: 4px;
+                letter-spacing: 2px;
             }
 
             &:active {
-                letter-spacing: 3px;
+                letter-spacing: 1.5px;
             }
         }
     }
+}
+
+input[type="checkbox"] {
+    accent-color: var(--game-color);
+    transition: accent-color 0.2s;
 }
 
 .lost-health {
@@ -290,5 +311,5 @@ main {
 }
 
 .end-screen-btns {
-    @include bottomBtns(-200px);
+    @include bottomBtns(-400px);
 }
