@@ -2,7 +2,6 @@ const sideTimer = document.querySelector(".timer-side span");
 const gameTimer = document.querySelector(".timer-game span");
 const sideSaves = [0, 0, 0];
 let sideSavesSum = 0;
-
 let startTime = 0;
 let elapsedTime = 0;
 let timerInterval;
@@ -24,13 +23,11 @@ function secondConverter(second) {
 
 function stopIteration() {
     clearInterval(timerInterval);
-    setTimeout(() => {
-        clearInterval(timerInterval);
-    }, 5000);
     sideTimer.textContent = "--";
     gameTimer.textContent = "--";
 }
 
+// Stop timerInterval for 700ms for changeSide
 function delayTimer(round) {
     sideSaves[round] = new Date() - startTime;
     sideSavesSum += sideSaves[round];

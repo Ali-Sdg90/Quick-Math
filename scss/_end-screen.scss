@@ -15,12 +15,11 @@
         @include flex-center-childs();
     }
 
-    &__health__block {
+    &__life__block {
         border-radius: 50%;
         width: 40px;
         height: 40px;
         margin: 8px;
-        // background: var(--game-color);
     }
 
     &__question {

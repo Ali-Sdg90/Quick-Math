@@ -13,12 +13,11 @@ const operations = document.querySelectorAll(".operation");
 const secondNumbers = document.querySelectorAll(".second-number");
 const inputs = document.querySelectorAll(".input");
 const submitBtns = document.querySelectorAll(".submit-btn");
-const sideHealthcircles = document.querySelectorAll(".health-bar__blocks");
+const sidelifecircles = document.querySelectorAll(".life-bar__blocks");
 const main = document.querySelector("main");
-const sideHealthLost = [0, 0, 0];
+const sidelifeLost = [0, 0, 0];
 const answers = ["", "", ""];
 const saveQuestions = [];
-
 const readyBtn = document.querySelector(".ready-screen__ready");
 const showAnsInput = document.querySelector("#show-ans");
 const alwaysReadyInput = document.querySelector("#always-ready");
@@ -26,18 +25,13 @@ const settingBtns = document.querySelector(".setting-btns");
 const settingBtnsNav = document.querySelector(".setting-btns__nav");
 const settingBtnsNavChar = document.querySelector(".setting-btns__nav div");
 let settingBtnsNavCharOpen = false;
-
 const endScreen = document.querySelector(".end-screen");
 const endScreenRoundTimes = document.querySelectorAll(
     ".end-screen__round-timer"
 );
 const endScreenTotlaTimes = document.querySelector(".end-screen__total-timer");
-const endScreenHealths = document.querySelectorAll(
-    ".end-screen__health__block"
-);
-const endScreenTotalHealths = document.querySelector(
-    ".end-screen__total-health"
-);
+const endScreenlifes = document.querySelectorAll(".end-screen__life__block");
+const endScreenTotallifes = document.querySelector(".end-screen__total-life");
 const endScreenquestions = document.querySelectorAll(".end-screen__question");
 const endScreenTotalquestions = document.querySelector(
     ".end-screen__total-question"
@@ -47,10 +41,9 @@ const endScreenBtns = document.querySelector(".end-screen-btns");
 // localStorage.clear();
 
 let showAns = false;
-showAns = false;
-
 let alwaysReady = false;
 
+// Check for localStorge
 if (localStorage.getItem("showAns") === "true") {
     showAns = true;
     showAnsInput.checked = showAns;
@@ -68,6 +61,8 @@ if (localStorage.getItem("alwaysReady") === "true") {
     }, 100);
 }
 
+// This function is called multiple times when the state of showAns changes or on
+// initial page load
 function showAnsPlaceholders() {
     for (let round = 0; round < 3; round++) {
         if (showAns) {
@@ -78,6 +73,7 @@ function showAnsPlaceholders() {
     }
 }
 
+// Remove readyScreen and start timer and if showAns was true, show placeholders
 readyBtn.addEventListener("click", function () {
     readyScreen.style.opacity = 0;
     setTimeout(() => {
@@ -92,6 +88,7 @@ readyBtn.addEventListener("click", function () {
     }, 300);
 });
 
+// Show or hide settingBtns by clicking on settingBtnsNav
 settingBtnsNav.addEventListener("click", function () {
     if (settingBtnsNavCharOpen) {
         settingBtnsNavCharOpen = false;
@@ -104,7 +101,8 @@ settingBtnsNav.addEventListener("click", function () {
     }
 });
 
-// Dosn't work for some reason ...
+// Works for show-ans and always-ready buttons and will change the state of showAns
+// and alwaysReady, and update localStorage.
 function showAnsAndAlwaysReady(checkfor, input, localStorageName) {
     if (checkfor) {
         input.checked = false;
@@ -117,13 +115,13 @@ function showAnsAndAlwaysReady(checkfor, input, localStorageName) {
     }
 }
 
+// Eventlisteners for show-ans and always-ready
 document
     .querySelector(".setting-btns__show-ans")
     .addEventListener("click", function () {
         showAns = showAnsAndAlwaysReady(showAns, showAnsInput, "showAns");
         showAnsPlaceholders();
     });
-
 document
     .querySelector(".setting-btns__always-ready")
     .addEventListener("click", function () {
@@ -134,6 +132,7 @@ document
         );
     });
 
+// Called once and make 3 questions and save some of them for end-screen
 function setNumbers() {
     for (let round = 0; round < 3; round++) {
         let ransdNum = "0";
@@ -162,6 +161,8 @@ function setNumbers() {
         operations[round].textContent = ransdNum;
         calcStr += "  " + ransdNum;
 
+        // If the calculation operator is *, then the second number is a multiple of
+        // 10 so that calculations are not too difficult
         do {
             if (calcStr.charAt(calcStr.length - 1) === "*") {
                 ransdNum = (10 - Math.ceil(Math.random() * 20)) * 10;
@@ -174,6 +175,7 @@ function setNumbers() {
 
         answers[round] = parseInt(calc(calcStr.replace("--", "+")));
 
+        // Each round submit button addEventListener
         submitBtns[round].addEventListener("click", function () {
             let inputQstn = inputs[round].value;
             if (!inputs[round].value) {
@@ -198,11 +200,21 @@ function setNumbers() {
     }
 }
 
+// Prepare strings for saving in saveQuestions
+function calcStrConverter(calcStr, answers) {
+    calcStr = calcStr.replace("*", "×");
+    calcStr = calcStr.replace("/", "÷");
+    return calcStr + " = " + answers;
+}
+
+// Function to convert a string to a math expression and calculate it.
 function calc(str) {
     const tempFunc = new Function("return " + str);
     return tempFunc();
 }
 
+// After a correct answer, the cube will rotate. For each round, the transform values
+// are different
 function changeSide(round) {
     switch (round) {
         case 0:
@@ -240,6 +252,7 @@ function changeSide(round) {
     }
 }
 
+// After the changeSide transition, certain things get disabled and enabled
 function disableEnableInputs(round) {
     delayTimer(round);
     submitBtns[round].classList.remove("submit-btn-effects");
@@ -250,17 +263,19 @@ function disableEnableInputs(round) {
     inputs[round + 1].disabled = false;
 }
 
+// If a wrong answer is submitted, the input will shake and one life will be lost. If
+// three lives are lost on one side, the game is over
 function wrongAnimation(round) {
     inputs[round].classList.add("shake");
-    if (sideHealthLost[round] === 2) {
+    if (sidelifeLost[round] === 2) {
         setTimeout(() => {
-            lostAllHealths(round);
+            lostAllLifes(round);
         }, 100);
     }
 
-    sideHealthLost[round]++;
-    for (let health = 0; health < sideHealthLost[round]; health++) {
-        sideHealthcircles[round * 3 + health].classList.add("lost-health");
+    sidelifeLost[round]++;
+    for (let life = 0; life < sidelifeLost[round]; life++) {
+        sidelifecircles[round * 3 + life].classList.add("lost-life");
     }
 
     inputs[round].addEventListener("animationend", function () {
@@ -270,7 +285,7 @@ function wrongAnimation(round) {
     });
 }
 
-// if spam enter timer will broke ...
+// Pressing Enter will trigger the readyBtn or submitBtn click
 document.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         if (!saveQuestions.length) {
@@ -283,12 +298,15 @@ document.addEventListener("keyup", function (event) {
     }
 });
 
+// Click on change-color button
 document
     .querySelector(".setting-btns__change-color")
     .addEventListener("click", function () {
         changeColor();
     });
 
+// Change theme of page
+// background-color = game-color * 2 = lineColor * 3
 changeColor();
 function changeColor() {
     let rgbSaver = [];
@@ -305,22 +323,16 @@ function changeColor() {
     `;
 }
 
-function calcStrConverter(calcStr, answers) {
-    calcStr = calcStr.replace("*", "×");
-    calcStr = calcStr.replace("/", "÷");
-
-    return calcStr + " = " + answers;
-}
-
-function lostAllHealths(round) {
+// Save the timer, burn other lives on the cube, and call endGame
+function lostAllLifes(round) {
     delayTimer(round);
     for (let roundCounter = round; roundCounter < 3; roundCounter++) {
-        for (let healthBlock = 0; healthBlock < 3; healthBlock++) {
-            sideHealthcircles[roundCounter * 3 + healthBlock].classList.add(
-                "lost-health"
+        for (let lifeBlock = 0; lifeBlock < 3; lifeBlock++) {
+            sidelifecircles[roundCounter * 3 + lifeBlock].classList.add(
+                "lost-life"
             );
         }
-        sideHealthLost[roundCounter] = 3;
+        sidelifeLost[roundCounter] = 3;
         endScreenquestions[roundCounter].style.textDecoration = "line-through";
     }
 
@@ -329,7 +341,7 @@ function lostAllHealths(round) {
     }, 700);
 }
 
-// endGame();
+// Show the end screen and set the value of the result table
 function endGame(passQustions) {
     stopIteration();
     endScreen.style.display = "grid";
@@ -347,17 +359,11 @@ function endGame(passQustions) {
         );
         endScreenTotlaTimes.textContent = secondConverter(sideSavesSum);
 
-        for (
-            let healthCont = 0;
-            healthCont < sideHealthLost[round];
-            healthCont++
-        ) {
-            endScreenHealths[3 * round + healthCont].classList.add(
-                "lost-health"
-            );
+        for (let lifeCont = 0; lifeCont < sidelifeLost[round]; lifeCont++) {
+            endScreenlifes[3 * round + lifeCont].classList.add("lost-life");
         }
-        endScreenTotalHealths.textContent = `${
-            9 - (sideHealthLost[0] + sideHealthLost[1] + sideHealthLost[2])
+        endScreenTotallifes.textContent = `${
+            9 - (sidelifeLost[0] + sidelifeLost[1] + sidelifeLost[2])
         } / 9`;
 
         endScreenquestions[round].textContent = saveQuestions[round];

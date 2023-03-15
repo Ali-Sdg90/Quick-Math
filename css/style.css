@@ -43,9 +43,9 @@ main {
   left: 0;
   position: absolute;
 }
-.side1 .health-bar,
-.side2 .health-bar,
-.side3 .health-bar {
+.side1 .life-bar,
+.side2 .life-bar,
+.side3 .life-bar {
   width: 301px;
   height: 70px;
   display: grid;
@@ -53,9 +53,9 @@ main {
   gap: 45px;
   padding: 14px 45px;
 }
-.side1 .health-bar__blocks,
-.side2 .health-bar__blocks,
-.side3 .health-bar__blocks {
+.side1 .life-bar__blocks,
+.side2 .life-bar__blocks,
+.side3 .life-bar__blocks {
   border: 1px solid var(--line-color);
   height: 100%;
   border-radius: 50%;
@@ -142,7 +142,7 @@ input[type=checkbox] {
   transition: accent-color 0.2s;
 }
 
-.lost-health {
+.lost-life {
   background: var(--line-color);
   box-shadow: 0 0 5px var(--background-color);
 }
@@ -189,7 +189,7 @@ input[type=checkbox] {
   justify-content: center;
   align-items: center;
 }
-.end-screen__health__block {
+.end-screen__life__block {
   border-radius: 50%;
   width: 40px;
   height: 40px;

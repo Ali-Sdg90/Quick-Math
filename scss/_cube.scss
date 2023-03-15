@@ -30,7 +30,7 @@ main {
     left: 0;
     position: absolute;
 
-    .health-bar {
+    .life-bar {
         width: 301px;
         height: 70px;
         display: grid;
@@ -114,7 +114,7 @@ input[type="checkbox"] {
     transition: accent-color 0.2s;
 }
 
-.lost-health {
+.lost-life {
     background: var(--line-color);
     box-shadow: 0 0 5px var(--background-color);
 }
