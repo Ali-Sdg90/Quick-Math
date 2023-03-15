@@ -1,7 +1,6 @@
 main {
-    width: 100%;
-    width: 400px;
-    height: 400px;
+    width: $cube-size;
+    height: $cube-size;
     position: absolute;
     top: 50%;
     left: 35%;
@@ -19,10 +18,10 @@ main {
 .side3 {
     border: 1px solid var(--line-color);
     background: var(--game-color);
-    width: 400px;
-    height: 400px;
+    width: $cube-size;
+    height: $cube-size;
     display: grid;
-    padding: 60px 50px 20px 50px;
+    padding: $box-side-padding;
     grid-template-rows: 1fr 1fr 2fr 1.4fr;
     width: 100%;
     height: 100%;
@@ -31,8 +30,8 @@ main {
     position: absolute;
 
     .life-bar {
-        width: 301px;
-        height: 70px;
+        width: $box-life-bar-width;
+        height: $box-life-bar-height;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 45px;
@@ -53,23 +52,23 @@ main {
     }
 
     .quiz {
-        @include flex-center-childs();
+        @include flex-center();
 
         span {
             margin: 5px;
             background: var(--line-color);
             color: white;
             padding: 5px;
-            border-radius: 5px;
-            font-size: 1.2rem;
+            border-radius: $border-radius-mediom;
+            font-size: $font-size-mediom;
             font-family: monospace;
         }
 
         input {
-            height: 40px;
-            width: 100px;
-            font-size: 1.2rem;
-            border-radius: 3px;
+            height: $box-input-height;
+            width: $box-input-width;
+            font-size: $font-size-mediom;
+            border-radius: $border-radius-small;
             padding: 5px;
             margin: 10px;
             background: var(--background-color);
@@ -90,20 +89,20 @@ main {
     .submit-btn {
         background: var(--background-color);
         margin: 10px;
-        border-radius: 5px;
+        border-radius: $border-radius-mediom;
         transition: letter-spacing 0.2s, $change-theme;
-        font-size: 1.1rem;
+        font-size: $font-size-small;
         letter-spacing: 1.5px;
 
         &-effects {
             cursor: pointer;
 
             &:hover {
-                letter-spacing: 2px;
+                letter-spacing: $submit-btn-letter-spacing-hover;
             }
 
             &:active {
-                letter-spacing: 1.5px;
+                letter-spacing: $submit-btn-letter-spacing-active;
             }
         }
     }
@@ -120,7 +119,7 @@ input[type="checkbox"] {
 }
 
 .side1 {
-    width: 400px;
+    width: $cube-size;
     transform: translateZ(-200px) translateY(200px) rotateY(90deg) rotate(90deg);
     transform-origin: right;
 }
@@ -131,7 +130,7 @@ input[type="checkbox"] {
 }
 
 .side3 {
-    transform: translateZ(-400px) scaleX(-1);
+    transform: translateZ(-$cube-size) scaleX(-1);
 }
 
 .shake {

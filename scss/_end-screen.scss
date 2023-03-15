@@ -1,8 +1,6 @@
 .end-screen {
     display: none;
-    // display: grid;
     opacity: 0;
-    // opacity: 1;
 
     @include ready-end-screen();
 
@@ -12,19 +10,19 @@
     div {
         border: 1px solid var(--line-color);
         padding: 10px;
-        @include flex-center-childs();
+        @include flex-center();
     }
 
     &__life__block {
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: $endScreen-life-block-width;
+        height: $endScreen-life-block-width;
         margin: 8px;
     }
 
     &__question {
         letter-spacing: 1px;
-        font-size: 1.1rem;
+        font-size: $font-size-small;
     }
 }
 

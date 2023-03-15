@@ -3,10 +3,10 @@
     @include bottomBtns(-300px);
     padding-top: 20px;
     background: var(--game-color);
-    box-shadow: inset 0px 0px 70px 80px var(--background-color);
+    box-shadow: $setting-btns-box-shadow;
     transition: bottom 0.3s, $change-theme, $change-theme-box-shadow;
 
-    z-index: 4;
+    z-index: $z-index-top;
 
     &__nav {
         position: absolute;
@@ -16,10 +16,10 @@
         color: var(--background-color);
         width: 45px;
         height: 30px;
-        border-radius: 5px 5px 0 0;
+        border-radius: $border-radius-mediom $border-radius-mediom 0 0;
         opacity: 0.3;
         cursor: pointer;
-        @include flex-center-childs();
+        @include flex-center();
         transition: $change-theme, opacity 0.2s;
 
         &:hover {
@@ -30,7 +30,7 @@
         div {
             transform: rotate(-90deg);
             font-weight: 600;
-            font-size: 1.6rem;
+            font-size: $font-size-large;
             font-family: sans-serif;
             cursor: pointer;
         }

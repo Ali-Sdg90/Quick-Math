@@ -1,3 +1,57 @@
-$change-side-timer: 0.7s;
+// main
 $change-theme: background 0.2s;
+$font-size-extra-large: 3rem;
+$border-radius-mediom: 5px;
+$border-radius-small: 3px;
+$change-side-timer: 0.7s;
+$font-size-large: 1.5rem;
+$font-size-mediom: 1.2rem;
+$font-size-small: 1.1rem;
+$page-min-width: 800px;
+$z-index-top: 3;
+$z-index-mediom: 2;
+$z-index-low: 1;
+
+// _cube.scss
 $change-theme-box-shadow: box-shadow 0.2s;
+$submit-btn-letter-spacing-active: 1.5px;
+$submit-btn-letter-spacing-hover: 2px;
+$box-side-padding: 60px 50px 20px 50px;
+$box-life-bar-width: 301px;
+$box-life-bar-height: 70px;
+$box-input-width: 100px;
+$box-input-height: 40px;
+$cube-size: 400px;
+
+// _end-screen.scss
+$endScreen-life-block-width: 40px;
+$endScreen-life-block-width: 40px;
+
+// _header.scss
+$h1-text-shadow: 0.28vh 0 rgba(98, 0, 255, 0.25),
+    -0.28vh 0 rgba(255, 0, 0, 0.25);
+$timers-font-size: max(3.37vh, 1rem);
+$h1-font-size: max(5.61vh, 1.7rem);
+$header-width: max(100%, 800px);
+
+// _keyframes.scss
+$shake-size: 5px;
+
+// _mixin.scss
+$ready-end-screen-box-shadow: inset 0px 0px 600px 260px var(--background-color);
+$ready-end-screen-height: min(550px, 90vh);
+$ready-end-screen-width: min(900px, 80vw);
+$bottomBtns-width: max(100%, 800px);
+$bottomBtns-height: 200px;
+$bottomBtns-btn-width: 250px;
+$bottomBtns-btn-height: 60px;
+
+// _ready-screen.scss
+$ready-screen-btn-box-shadow: 0 1px 3px var(--line-color),
+    inset 0 0 10px var(--line-color);
+$ready-screen-btn-letter-spacing-active: 0.5px;
+$ready-screen-btn-letter-spacing-hover: 1px;
+$ready-screen-btn-width: 170px;
+
+// _setting-btns.scss
+$setting-btns-box-shadow: inset 0px 0px 70px 80px var(--background-color);

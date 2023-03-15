@@ -1,19 +1,19 @@
 .ready-screen {
     @include ready-end-screen();
-    @include flex-center-childs();
+    @include flex-center();
     flex-direction: column;
 
     &__text {
-        font-size: 3rem;
+        font-size: $font-size-extra-large;
         text-shadow: 0 2px 5px var(--line-color);
     }
 
     &__ready {
-        font-size: 1.5rem;
+        font-size: $font-size-large;
         padding: 15px;
-        width: 170px;
+        width: $ready-screen-btn-width;
         margin-top: 60px;
-        border-radius: 5px;
+        border-radius: $border-radius-mediom;
         background: var(--game-color);
         cursor: pointer;
         box-shadow: 0 3px 3px var(--line-color);
@@ -22,13 +22,12 @@
             $change-theme;
 
         &:hover {
-            letter-spacing: 1px;
+            letter-spacing: $ready-screen-btn-letter-spacing-hover;
         }
 
         &:active {
-            letter-spacing: 0.5px;
-            box-shadow: 0 1px 3px var(--line-color),
-                inset 0 0 10px var(--line-color);
+            letter-spacing: $ready-screen-btn-letter-spacing-active;
+            box-shadow: $ready-screen-btn-box-shadow;
             transform: translate(0, 2px);
         }
     }

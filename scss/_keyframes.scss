@@ -3,13 +3,13 @@
         transform: translateX(0);
     }
     25% {
-        transform: translateX(-5px);
+        transform: translateX(-$shake-size);
     }
     50% {
-        transform: translateX(5px);
+        transform: translateX($shake-size);
     }
     75% {
-        transform: translateX(-5px);
+        transform: translateX(-$shake-size);
     }
     100% {
         transform: translateX(0);

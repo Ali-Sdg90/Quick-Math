@@ -3,26 +3,25 @@ header {
     top: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 100%;
+    width: $header-width;
     background: var(--background-color);
-    z-index: 2;
+    z-index: $z-index-mediom;
 }
 
 .timer-side,
 .timer-game {
-    @include flex-center-childs();
+    @include flex-center();
     flex-direction: column;
 
     div,
     span {
-        font-size: 3.37vh;
+        font-size: $timers-font-size;
         padding: 0.56vh;
     }
 }
 
 h1 {
-    font-size: 5.61vh;
-    @include flex-center-childs();
-    text-shadow: 0.28vh 0 rgba(98, 0, 255, 0.25),
-        -0.28vh 0 rgba(255, 0, 0, 0.25);
+    font-size: $h1-font-size;
+    @include flex-center();
+    text-shadow: $h1-text-shadow;
 }

@@ -1,40 +1,42 @@
-@mixin flex-center-childs() {
+@mixin flex-center() {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 @mixin ready-end-screen() {
-    box-shadow: inset 0px 0px 600px 260px var(--background-color);
-    width: 900px;
-    height: 550px;
+    box-shadow: $ready-end-screen-box-shadow;
+    width: $ready-end-screen-width;
+    min-width: $page-min-width;
+    height: $ready-end-screen-height;
+    min-height: 450px;
     padding-bottom: 60px;
     position: absolute;
     top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: $z-index-low;
     transition: opacity 0.3s, $change-theme, $change-theme-box-shadow;
 }
 
 @mixin bottomBtns($btm) {
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 100%;
-    height: 200px;
-    @include flex-center-childs();
+    width: $bottomBtns-width;
+    height: $bottomBtns-height;
+    @include flex-center();
     padding-top: 5px;
     align-items: flex-start;
     gap: 50px;
     transition: bottom 400ms 100ms, $change-theme;
-    z-index: 2;
+    z-index: $z-index-mediom;
     left: 50%;
     bottom: $btm;
 
     button {
         width: 250px;
         height: 60px;
-        border-radius: 5px;
+        border-radius: $border-radius-mediom;
         border: 2px solid var(--game-color);
         background: var(--background-color);
         box-shadow: 0 3px 3px var(--line-color);

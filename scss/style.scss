@@ -1,11 +1,4 @@
 @import "config";
-@import "mixin";
-@import "keyframes";
-@import "cube";
-@import "end-screen";
-@import "header";
-@import "ready-screen";
-@import "setting-btns";
 
 * {
     padding: 0;
@@ -24,11 +17,20 @@
 
 body {
     background: var(--background-color);
-    width: 100%;
+    min-width: $page-min-width;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 ::selection {
     background: transparent;
 }
+
+
+@import "mixin";
+@import "header";
+@import "ready-screen";
+@import "setting-btns";
+@import "cube";
+@import "end-screen";
+@import "keyframes";
