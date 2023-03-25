@@ -152,10 +152,10 @@ function setNumbers() {
                 ransdNum = "-";
                 break;
             case 3:
-                ransdNum = "*";
+                ransdNum = "×";
                 break;
             default:
-                ransdNum = "/";
+                ransdNum = "÷";
                 break;
         }
         operations[round].textContent = ransdNum;
@@ -164,7 +164,7 @@ function setNumbers() {
         // If the calculation operator is *, then the second number is a multiple of
         // 10 so that calculations are not too difficult
         do {
-            if (calcStr.charAt(calcStr.length - 1) === "*") {
+            if (calcStr.charAt(calcStr.length - 1) === "×") {
                 ransdNum = (10 - Math.ceil(Math.random() * 20)) * 10;
             } else {
                 ransdNum = 100 - Math.ceil(Math.random() * 200);
@@ -191,24 +191,19 @@ function setNumbers() {
         });
 
         console.log(
-            `R${round} : ${calcStr} = ${calc(calcStr).toFixed(2)} -> ${
+            `R${round + 1} : ${calcStr} = ${calc(calcStr).toFixed(2)} -> ${
                 answers[round]
             }`
         );
 
-        saveQuestions.push(calcStrConverter(calcStr, answers[round]));
+        saveQuestions.push(calcStr + " = " + answers[round]);
     }
 }
 
-// Prepare strings for saving in saveQuestions
-function calcStrConverter(calcStr, answers) {
-    calcStr = calcStr.replace("*", "×");
-    calcStr = calcStr.replace("/", "÷");
-    return calcStr + " = " + answers;
-}
-
-// Function to convert a string to a math expression and calculate it.
+// Function to convert a string to a math expression and calculate it
 function calc(str) {
+    str = str.replace("×", "*");
+    str = str.replace("÷", "/");
     const tempFunc = new Function("return " + str);
     return tempFunc();
 }

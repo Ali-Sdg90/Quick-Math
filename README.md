@@ -48,6 +48,7 @@
     </li>
     <li>Always Ready: When disabled, skips the ready screen.</li>
 </ul>
+<p>Note: The correct answer is always an integer. For example, -44 ÷ -82 = 0.54 rounds down to 0.</p>
 <h2>Author</h2>
 <p>
     Quick Math was created by
