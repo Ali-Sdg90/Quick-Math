@@ -5,6 +5,10 @@
     game gives the user lives, and if they lose all three lives in one question,
     they lose the game.
 </p>
+
+<img src="Assets/1.png" alt="Quick-Math-img" style="height: 300px" />
+<img src="Assets/2.png" alt="Quick-Math-img" style="height: 300px" />
+
 <h2>Features</h2>
 <ul>
     <li>Three math questions per game</li>
@@ -33,9 +37,7 @@
     <li>JavaScript</li>
 </ul>
 <h2>Settings</h2>
-<p>
-    Quick Math has several customizable settings :
-</p>
+<p>Quick Math has several customizable settings :</p>
 <ul>
     <li>
         Show Answer: When enabled, the answer to each question is displayed in
@@ -48,7 +50,10 @@
     </li>
     <li>Always Ready: When disabled, skips the ready screen.</li>
 </ul>
-<p>Note: The correct answer is always an integer. For example, -44 ÷ -82 = 0.54 rounds down to 0.</p>
+<p>
+    Note: The correct answer is always an integer. For example, -44 ÷ -82 = 0.54
+    rounds down to 0.
+</p>
 <h2>Author</h2>
 <p>
     Quick Math was created by
